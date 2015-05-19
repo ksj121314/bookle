@@ -1,0 +1,24 @@
+<p><%= flash[:alert] %></p>
+<h2>책 정보 보기</h2>
+
+<div style="border: 1px solid #ffffff">
+  <h4>제목: <%= @book.title %></h4>
+  <p style="color: #ff0000">분류: <%= @book.category %></p>
+  <p>가격: <%= @book.price %> 원</p>
+  <p>발행일자: <%= @book.publicdate %></p>
+  <p>판매여부: <%= @book.out %></p>
+  <p>내용: <%= @book.content %></p>
+  <p><a href="/books/purchase_complete/<%= @book.id %>">구매하기</a></p>
+  <p><a href="/carts/create">장바구니</a></p>
+
+  <hr>
+  <h4>리뷰목록</h4>
+  <% @book.book_review.each do |book_review| %>
+  <p><strong><%= book_review.user.username %> </strong><a href="/book_reviews/show/<%= book_review.id %>"><%= book_review.title %></a> [<%= book_review.book_review_comments.count %>]</p>
+  <% end %>
+
+ <a href="/book_reviews/write/<%= @book.id %>">리뷰쓰기</a></h4>
+
+  <p><a href="/books/edit/<%= @book.id %>">수정</a> | <a href="/books/delete_complete/<%= @book.id %>">삭제</a></p>
+  </form> <p><a href="/">전체 리스트 가기</a></p>
+</div>

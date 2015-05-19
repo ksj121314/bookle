@@ -1,0 +1,15 @@
+<% @books.reverse.each do |book| %>
+<div style="border: 1px solid #ffffff">
+  <h4><a href="/books/show/<%= book.id %>"><%= book.title %></a> [<%= book.book_review.count %>]</h4>
+  <!--
+  <p style="color: #ff0000"><%= book.category %></p> 
+  <p>관리자: <strong><%= book.user.username %></strong></p>
+  <p>가격: <%= book.price %> 원</p>
+  <p>발행일자: <%= book.publicdate %></p>
+  <p>판매여부: <%= book.out %></p>
+  <p>내용: <%= book.content %></p>
+  -->
+
+</div>
+<% end %>
+

@@ -1,0 +1,26 @@
+<p><%= flash[:alert] %></p>
+<h2>책 등록하기</h2>
+
+<form action="/books/write_complete" method="post">
+  <p style="color: #ff0000">분류:
+  <select name="post_category">
+    <option value="문학">문학</option>
+    <option value="역사">역사</option>
+    <option value="사회과학">사회과학</option>
+    <option value="교육">교육</option>
+    <option value="취미">취미</option>
+  </select></p>
+  <p>제목: <input type="text" name="post_title" placeholder="제목을 입력하세요."></p>
+  <p>내용: <textarea name="post_content" placeholder="내용을 입력하세요."></textarea></p>
+  <p>가격: <textarea name="post_price" placeholder="가격을 입력하세요."></textarea></p>
+  <p>발매일: <textarea name="post_publicdate" placeholder="날짜을 입력하세요."></textarea></p>
+  <!--<p>품절여부: <textarea name="post_out" placeholder="품절여부를 입력하세요."></textarea></p> -->
+  <p>품절여부: 
+  <select name="post_out">
+    <option value="판매중">판매중</option>
+    <option value="품절">품절</option>
+  </select></p>
+
+
+  <input type="submit" value="추가하기">
+</form>

@@ -1,4 +1,10 @@
-<h4><a href="/">Bookle</a> || <a href="/literature">문학</a> | <a href="/history">역사</a> | <a href="/socialscience">사회과학</a> | <a href="/education">교육</a> | <a href="/hobby">취미</a> || <a href="/books/write">책등록하기</a> || 
+<h4>
+<form action="/books/search_list" method="post">
+<a href="/">Bookle</a> || <input type="text" name="search_data" placeholder="책 제목을 입력하세요."></textarea>
+<input type="submit" value="검색">
+</form>
+
+<a href="/books/posts">전체목록</a> | <a href="/literature">문학</a> | <a href="/history">역사</a> | <a href="/socialscience">사회과학</a> | <a href="/education">교육</a> | <a href="/hobby">취미</a> || <a href="/books/write">책등록하기</a> || 
 
 <!-- <a href="/review">리뷰목록</a> -->
 <% if session[:user_id].nil? %>
@@ -6,7 +12,8 @@
 <% else %>
 <a href="/users/logout_complete">로그아웃</a> |
 <a>사용자: <%= session[:username] %></a> |
-<a>잔액: <%= session[:money] %>원</a>
-<a href="/books/purchase_list">구매목록</a>
+<a>잔액: <%= session[:money] %>원</a> |
+<a href="/books/purchase_list">구매목록</a> |
+<a href="/books/shopping_list">장바구니</a>
 <% end %>
 </h4>

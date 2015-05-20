@@ -1,19 +1,13 @@
+<%= render :partial => "layouts/header" %>
+
 <p><%= flash[:alert] %></p>
 <h2>구매 목록 보기</h2>
 
-<% @purchaselists.reverse.each do |purchaselist| %>
+<% @purchaselist.reverse.each do |purchaselist| %>
 <div style="border: 1px solid #ffffff">
-  <h4><a href="/books/show/<%= purchaselist.book.id %>"><%= purchaselist.book.title %></a> [<%= purchaselist.book.book_review.count %>]</h4>
-
-<!--
-  <p style="color: #ff0000"><%= book.category %></p>
-  <p>관리자: <strong><%= book.user.username %></strong></p>
-  <p>가격: <%= book.price %> 원</p>
-  <p>발행일자: <%= book.publicdate %></p>
-  <p>판매여부: <%= book.out %></p>
-  <p>내용: <%= book.content %></p>
-  -->
+  <h4><a href="/books/show/<%= purchaselist.book.id %>"><%= purchaselist.book.title %></a> [<%= purchaselist.book.book_review.count %>] <%= purchaselist.book.price %> 원 </h4>
 
 </div>
 <% end %>
 
+<h2>구매 총액: <%= @total_price %> 원</h2>

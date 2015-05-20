@@ -1,9 +1,13 @@
 class BooksController < ApplicationController
   before_action :login_check
-  skip_before_action  :login_check, :only => [:posts, :posts_category, :show] #해당 작업 3가지 빼고는 전부 로그인이 필요
+  skip_before_action  :login_check, :only => [:main, :posts, :posts_category, :show, :search_list] #해당 작업 3가지 빼고는 전부 로그인이 필요
+ 
+  def main
+  end
 
   def posts
    @books = Book.all
+   @user = User.where(id: session[:user_id])[0]
   end
 
   def posts_category
@@ -92,33 +96,88 @@ class BooksController < ApplicationController
   end
 
   def purchase_complete
-    post = Book.find(params[:id])
     user = User.where(id: session[:user_id])[0]
-    purchaselist = PurchaseList.new
-    if post.price <= session[:money]
-      user.money = user.money - post.price
+    shoppinglist = ShoppingList.where(user_id: user.id)
+    if shoppinglist.size == 0
+       flash[:alert] = "장바구니가 비었습니다."
+       redirect_to :back
+    else
+
+    if session[:money] >= params[:price].to_i
+      user.money = user.money - params[:price].to_i
       if user.save
         session[:money] = user.money
-        purchaselist.user_id = user.id
-        purchaselist.book_id = post.id
-        purchaselist.save
-        flash[:alert] = "구매 완료하였습니다."
-        redirect_to "/"
+        shoppinglist.each do |sl|
+          purchaselist = PurchaseList.new
+          purchaselist.user_id = user.id
+          purchaselist.book_id = sl.book_id
+          purchaselist.save
+          sl.destroy
+        end
+          flash[:alert] = "구매 완료하였습니다."
+          redirect_to "/books/purchase_list"
+        else
+          flash[:alert] = post.errors.values.flatten.join(' ')
+          redirect_to :back
+        end
+
       else
-        flash[:alert] = post.errors.values.flatten.join(' ')
+        flash[:alert] = "돈이 모잘랍니다."
         redirect_to :back
       end
-
-    else
-      flash[:alert] = "돈이 모잘랍니다."
-      redirect_to :back
     end
   end
 
   def purchase_list
-    # @books = Book.purchaselist.where(id: session[:user_id])[0]
-    #@user = User.where(id: session[:user_id])[0]
-    #@list = @user.purchase_lists.(params.require(:purchase_list).permit(:book)
-    #redirect_to 
+     @purchaselist = PurchaseList.where(user_id: session[:user_id])
+     @total_price = 0
+     @purchaselist.each do |sl|
+       @total_price += sl.book.price
+     end
+  end
+
+  def shopping_list_add
+     post = Book.find(params[:id])
+     if post.out == "판매중"
+       user = User.where(id: session[:user_id])[0]
+       cartdata = ShoppingList.new
+       cartdata.user_id = user.id
+       cartdata.book_id = post.id
+       cartdata.save
+       flash[:alert] = "담기 완료하였습니다."
+       redirect_to "/books/shopping_list"
+     else
+       flash[:alert] = "품절된 상품입니다."
+       redirect_to :back
+     end
+  end
+
+  def shopping_list
+     @shoppinglist = ShoppingList.where(user_id: session[:user_id])
+     @total_price = 0
+     @shoppinglist.each do |sl|
+       @total_price += sl.book.price
+     end
+  end
+
+  def shopping_delete
+     post = ShoppingList.find(params[:id])
+     post.destroy
+     flash[:alert] = "제외 되었습니다."
+     redirect_to "/books/shopping_list"
+  end
+ 
+  def search_list
+    @books = Book.where(title: params[:search_data])
+    @allbooks = Book.all
+
+    @allbooks.each do |b|
+      if b.title.include? params[:search_data] #검색한 단어가 포함되어있을 경우
+        if  b.title != params[:search_data] #동일한이름은 선언할때 찾았으므로 제외
+          @books += Book.where(title: b.title)
+        end
+      end
     end
+
+  end
 end

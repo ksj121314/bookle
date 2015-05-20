@@ -1,6 +1,4 @@
 Bookle::Application.routes.draw do
-  resources :carts
-
   get "users/signup"
   post "users/signup_complete"
   get "users/login"
@@ -16,7 +14,8 @@ Bookle::Application.routes.draw do
   get "book_reviews/delete_complete/:id" => 'book_reviews#delete_complete'
   post "book_reviews/write_comment_complete"
   get "book_reviews/delete_comment_complete/:id" => 'book_reviews#delete_comment_complete'
-  root "books#posts"
+  root "books#main"
+  get "books/posts"
   get "/:category" => "books#posts_category"
   get "books/show/:id" => 'books#show'
   get "books/write"
@@ -24,9 +23,12 @@ Bookle::Application.routes.draw do
   get "books/edit/:id" => 'books#edit'
   post "books/edit_complete"
   get "books/delete_complete/:id" => 'books#delete_complete'
-  get "books/purchase_complete/:id" => 'books#purchase_complete'
+  get "books/purchase_complete/:price" => 'books#purchase_complete'
   get "books/purchase_list"
-  get "carts/create"
+  get "books/shopping_list"
+  get "books/shopping_list_add/:id" => 'books#shopping_list_add'
+  get "books/shopping_delete/:id" => 'books#shopping_delete'
+  post "books/search_list"
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

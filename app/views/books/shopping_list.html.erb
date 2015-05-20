@@ -1,0 +1,13 @@
+<%= render :partial => "layouts/header" %>
+
+<p><%= flash[:alert] %></p>
+<h2>장바구니 목록 보기</h2>
+
+<% @shoppinglist.reverse.each do |purchaselist| %>
+<div style="border: 1px solid #ffffff">
+  <h4><a href="/books/show/<%= purchaselist.book.id %>"><%= purchaselist.book.title %></a> [<%= purchaselist.book.book_review.count %>] <%= purchaselist.book.price %> 원 <a href="/books/shopping_delete/<%= purchaselist.id %>">장바구니에서 제외</a></h4> 
+
+</div>
+<% end %>
+<h2>전체 가격: <%= @total_price %> 원</h2>
+<p><a href="/books/purchase_complete/<%= @total_price %>">구매하기</a></p>

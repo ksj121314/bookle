@@ -1,5 +1,6 @@
 <% @books.reverse.each do |book| %>
 <div style="border: 1px solid #ffffff">
+  <p><img src="<%= book.image_url(:thumb) %>"></p>
   <h4><a href="/books/show/<%= book.id %>"><%= book.title %></a> [<%= book.book_review.count %>] <%= book.price %> 원 | <%= book.out %></h4>
   <!--
   <p style="color: #ff0000"><%= book.category %></p> 

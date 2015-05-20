@@ -5,6 +5,7 @@
 
 <% @purchaselist.reverse.each do |purchaselist| %>
 <div style="border: 1px solid #ffffff">
+  <p><img src="<%= purchaselist.book.image_url(:thumb) %>"></p>
   <h4><a href="/books/show/<%= purchaselist.book.id %>"><%= purchaselist.book.title %></a> [<%= purchaselist.book.book_review.count %>] <%= purchaselist.book.price %> 원 </h4>
 
 </div>

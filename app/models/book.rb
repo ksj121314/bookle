@@ -9,5 +9,5 @@ class Book < ActiveRecord::Base
   validates :price, :presence => { :message => "가격을 반드시 입력하셔야 합니다." }
   validates :publicdate, :presence => { :message => "발행일자를 반드시 입력하셔야 합니다." }
   validates :out, :inclusion => { :in => ["품절","판매중"], :message => "품절, 판매중 중 하나를 선택하셔야 합니다." }
-
+  mount_uploader :image, ImageUploader
 end

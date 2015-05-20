@@ -47,6 +47,7 @@ class BooksController < ApplicationController
     post.price = params[:post_price]
     post.publicdate = params[:post_publicdate]
     post.out = params[:post_out]
+    post.image = params[:image]    
 
     if post.save
       flash[:alert] = "저장되었습니다."
@@ -170,6 +171,7 @@ class BooksController < ApplicationController
   def search_list
     @books = Book.where(title: params[:search_data])
     @allbooks = Book.all
+    @word = params[:search_data]
 
     @allbooks.each do |b|
       if b.title.include? params[:search_data] #검색한 단어가 포함되어있을 경우

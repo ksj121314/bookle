@@ -3,7 +3,7 @@
 <p><%= flash[:alert] %></p>
 <h2>책 등록하기</h2>
 
-<form action="/books/write_complete" method="post">
+<form action="/books/write_complete" method="post" enctype="multipart/form-data">
   <p style="color: #ff0000">분류:
   <select name="post_category">
     <option value="문학">문학</option>
@@ -22,7 +22,7 @@
     <option value="판매중">판매중</option>
     <option value="품절">품절</option>
   </select></p>
-
+  <p>사진 업로드: <input type="file" name="image"></p>
 
   <input type="submit" value="추가하기">
 </form>

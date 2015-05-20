@@ -4,6 +4,7 @@
 <h2>책 정보 보기</h2>
 
 <div style="border: 1px solid #ffffff">
+  <p><img src="<%= @book.image_url(:medium) %>"></p>
   <h4>제목: <%= @book.title %></h4>
   <p style="color: #ff0000">분류: <%= @book.category %></p>
   <p>가격: <%= @book.price %> 원</p>

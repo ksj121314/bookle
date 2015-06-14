@@ -1,22 +1,32 @@
-<%= render :partial => "layouts/header" %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4 text-center">
+      <h2>책 수정하기</h2>
 
-<p><%= flash[:alert] %></p>
-<h2>책 게시글 수정하기</h2>
-
-<form action="/books/edit_complete" method="post">
-  <input type="hidden" name="id" value="<%= @book.id %>">
-  <p style="color: #ff0000">분류:
-  <select name="post_category">
-    <option value="문학">문학</option>
-    <option value="역사">역사</option>
-    <option value="사회과학">사회과학</option>
-    <option value="교육">교육</option>
-    <option value="취미">취미</option>
-  </select></p>
-  <p>제목: <input type="text" name="post_title" value="<%= @book.title %>"></p>
-  <p>내용: <textarea name="post_content"><%= @book.content %></textarea></p>
-  <p>가격: <textarea name="post_price"><%= @book.price %></textarea></p>
-  <p>발매일: <textarea name="post_publicdate"><%= @book.publicdate %></textarea></p>
-  <p>품절여부: <textarea name="post_out"><%= @book.out %></textarea></p>
-  <input type="submit" value="수정하기">
-</form>
+      <form action="/books/edit_complete" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="<%= @book.id %>">
+        <p style="color: #ff0000">분류:
+        <select name="post_category">
+          <option value="문학">문학</option>
+          <option value="역사">역사</option>
+          <option value="사회과학">사회과학</option>
+          <option value="교육">교육</option>
+          <option value="취미">취미</option>
+        </select></p>
+        <p><input class="form-sign" name="post_title" value="<%= @book.title %>"></p>
+        <p><input class="form-sign" name="post_price" value="<%= @book.price %>"></p>
+        <p><input class="form-sign" name="post_publicdate" value="<%= @book.publicdate%>"></p>
+        <p><textarea class="form-area" name="post_content"><%= @book.content %></textarea></p>
+        <p>품절여부: 
+        <select name="post_out">
+          <option value="판매중">판매중</option>
+          <option value="품절">품절</option>
+        </select></p>
+        <input class="btn btn-lg btn-block" type="submit" value="수정하기">
+      </form>
+    <div class="col-md-4">
+    </div>
+  </div>
+</div>

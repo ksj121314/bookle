@@ -1,11 +1,17 @@
-<%= render :partial => "layouts/header" %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4 text-center">
+      <h2>리뷰 수정</h2>
 
-<p><%= flash[:alert] %></p>
-<h2>리뷰 수정하기</h2>
-
-<form action="/book_reviews/edit_complete" method="post">
-  <input type="hidden" name="id" value="<%= @post.id %>">
-  <p>제목: <input type="text" name="post_title" value="<%= @post.title %>"></p>
-  <p>내용: <textarea name="post_content"><%= @post.content %></textarea></p>
-  <input type="submit" value="수정하기">
-</form>
+      <form action="/book_reviews/edit_complete" method="post">
+        <input type="hidden" name="id" value="<%= @post.id %>">
+        <p><input class="form-sign" name="post_title" value="<%= @post.title %>"></p>
+        <p><textarea class="form-area" name="post_content"><%= @post.content %></textarea></p>
+        <input class="btn btn-lg btn-block" type="submit" value="수정하기">
+      </form>
+    <div class="col-md-4">
+    </div>
+  </div>
+</div>

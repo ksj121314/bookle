@@ -1,12 +1,3 @@
-<%= render :partial => "layouts/header" %>
-
-<%= flash[:alert] %>
-
-<div>
-  <h2>Bookle 사이트에 오신 여러분들을 환영합니다.</h2>
-  <p>항상 최선을 다하는 모습 보여드리겠습니다!</p>
+<div class="list-container">
+  <%= render :partial => "books/posts" %>
 </div>
-
-<hr>
-
-<%= render :partial => "books/posts" %>

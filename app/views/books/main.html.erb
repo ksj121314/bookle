@@ -1,20 +1,24 @@
-<h4>
-
-<% if session[:user_id].nil? %>
-<a href="/users/signup">회원가입</a> | <a href="/users/login">로그인</a>
-<% else %>
-<a href="/users/logout_complete">로그아웃</a> |
-<a>사용자: <%= session[:username] %></a> |
-<a>잔액: <%= session[:money] %>원</a> |
-<a href="/books/purchase_list">구매목록</a> |
-<a href="/books/shopping_list">장바구니</a>
-<% end %>
-
-<form action="/books/search_list" method="post">
-<a href="/">Bookle</a> || <input type="text" name="search_data" placeholder="책 제목을 입력하세요."></textarea>
-<input type="submit" value="검색">
-</form>
-
-<a href="/books/posts">전체목록</a> | <a href="/literature">문학</a> | <a href="/history">역사</a> | <a href="/socialscience">사회과학</a> | <a href="/education">교육</a> | <a href="/hobby">취미</a>
-
-</h4>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-6 text-center">
+      <img src="/assets/logo.png" style="width:300px; margin-top:100px; margin-bottom:20px;">
+      <form action="/books/search_list" method="post">
+        <p><input class="form-input-main" name="search_data" placeholder="Bookle 검색"></input></p>
+      </form>
+      <nav class="navbar">
+        <ul class="nav" style="margin-left:15%;">
+          <li><a href="/books/posts">전체목록</a></li>
+          <li><a href="/literature">문학</a></li>
+          <li><a href="/history">역사</a></li>
+          <li><a href="/socialscience">사회과학</a></li>
+          <li><a href="/education">교육</a></li>
+          <li><a href="/hobby">취미</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="col-md-3">
+    </div>
+  </div>
+</div>

@@ -1,19 +1,87 @@
-<h4>
-<form action="/books/search_list" method="post">
-<a href="/">Bookle</a> || <input type="text" name="search_data" placeholder="책 제목을 입력하세요."></textarea>
-<input type="submit" value="검색">
-</form>
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container">
+    <% if request.fullpath!="/" %>
+      <ul class="search">
+        <a class="search-logo" href="/"><img src="/assets/logo.png" width="100"></img></a>
+        <form class="search-bar" action="/books/search_list" method="post">
+          <input class="form-input-list" name="search_data" placeholder="책 제목을 입력하세요."></input>
+        </form>
+      </ul>
+    <% end %>
+    <ul class="nav navbar-nav" style="float:right">
+      <% if session[:user_id].nil? %>
+        <li><a href="/users/signup">회원가입</a></li>
+        <li><a href="/users/login">로그인</a></li>
+      <% else %>
+        <li><a href="/users/logout_complete">로그아웃</a></li>
+        <li><a><%= session[:username] %></a></li>
+        <li><a><%= session[:money] %>원</a></li>
+        <li><a href="/books/purchase_list">구매목록</a></li>
+        <li><a href="/books/shopping_list">장바구니</a></li>
+        <% if session[:user_id]==1 %>
+          <li><a href="/books/write">책 등록</a></li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+</nav>
 
-<a href="/books/posts">전체목록</a> | <a href="/literature">문학</a> | <a href="/history">역사</a> | <a href="/socialscience">사회과학</a> | <a href="/education">교육</a> | <a href="/hobby">취미</a> || <a href="/books/write">책등록하기</a> || 
-
-<!-- <a href="/review">리뷰목록</a> -->
-<% if session[:user_id].nil? %>
-<a href="/users/signup">회원가입</a> | <a href="/users/login">로그인</a>
-<% else %>
-<a href="/users/logout_complete">로그아웃</a> |
-<a>사용자: <%= session[:username] %></a> |
-<a>잔액: <%= session[:money] %>원</a> |
-<a href="/books/purchase_list">구매목록</a> |
-<a href="/books/shopping_list">장바구니</a>
+<% if request.fullpath!="/" %>
+  <nav class="navbar">
+    <div class="container" style="padding: 0 15px 0 130px">
+      <ul class="nav navbar-nav">
+        <li><a color="#FF0000" href="/books/posts">
+          <% if request.fullpath=="/books/posts" %>
+            <font style="color:#FF0000; font-weight: bold;">전체목록</font>
+          <% else %>
+            전체목록
+          <% end %>
+         </a></li>
+         <li><a href="/literature">
+          <% if request.fullpath=="/literature" %>
+            <font style="color:#FF0000; font-weight: bold;">문학</font>
+          <% else %>
+           문학
+          <% end %>
+        </a></li>
+        <li><a href="/history">
+          <% if request.fullpath=="/history" %>
+            <font style="color:#FF0000; font-weight: bold;">역사</font>
+          <% else %>
+            역사
+          <% end %>
+        </a></li>
+        <li><a href="/socialscience">
+          <% if request.fullpath=="/socialscience" %>
+            <font style="color:#FF0000; font-weight: bold;">사회과학</font>
+          <% else %>
+            사회과학
+          <% end %>
+        </a></li>
+        <li><a href="/education">
+          <% if request.fullpath=="/education" %>
+            <font style="color:#FF0000; font-weight: bold;">교육</font>
+          <% else %>
+            교육
+          <% end %>
+        </a></li>
+        <li><a href="/hobby">
+          <% if request.fullpath=="/hobby" %>
+            <font style="color:#FF0000; font-weight: bold;">취미</font>
+          <% else %>
+            취미
+          <% end %>
+        </a></li>
+      </ul>
+    </div>
+  </nav>
+  <hr>
 <% end %>
-</h4>
+
+<div class="container">
+  <% if !flash[:alert].nil? %>
+  <div class="alert alert=danger">
+    <%= flash[:alert] %>
+  </div>
+  <% end %>
+</div>

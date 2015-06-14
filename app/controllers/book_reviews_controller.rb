@@ -54,10 +54,12 @@ class BookReviewsController < ApplicationController
 
   def delete_complete
     post = BookReview.find(params[:id])
+    book = Book.find(post.book_id)
+    bookID = "post.book_id"
     if post.user_id == session[:user_id] || session[:user_id] == 1
       post.destroy
       flash[:alert] = "삭제되었습니다."
-      redirect_to "/"
+      redirect_to "/books/show/#{book.id}"
     else
       flash[:alert] = "삭제 권한이 없습니다."
       redirect_to :back

@@ -1,16 +1,23 @@
 <% @books.reverse.each do |book| %>
-<div style="border: 1px solid #ffffff">
-  <p><img src="<%= book.image_url(:thumb) %>"></p>
-  <h4><a href="/books/show/<%= book.id %>"><%= book.title %></a> [<%= book.book_review.count %>] <%= book.price %> 원 | <%= book.out %></h4>
-  <!--
-  <p style="color: #ff0000"><%= book.category %></p> 
-  <p>관리자: <strong><%= book.user.username %></strong></p>
-  <p>가격: <%= book.price %> 원</p>
-  <p>발행일자: <%= book.publicdate %></p>
-  <p>판매여부: <%= book.out %></p>
-  <p>내용: <%= book.content %></p>
-  -->
-
+<div class="list-row">
+  <div class="col-md-2">
+    <a href="/books/show/<%= book.id %>"><img src="<%= book.image_url(:thumb) %>" width="105px"></a>
+  </div>
+  <div class="col-md-7">
+    <br>
+    <font style="font-size:20px;"><a href="/books/show/<%= book.id %>">[<%= book.category %>] <%= book.title %></a></font>
+    <br><br>
+    <p>발행일자: <%= book.publicdate %>
+    <p>회원리뷰: <%= book.book_review.count %> 개</p>
+  </div>
+  <div class="col-md-3 text-right">
+    <br>
+    <br>
+    <font style="font-size:20px;"><%= book.price %></font> 원
+    <br>
+    <br>
+    <font color="#FF0000"><%= book.out %></font>
+  </div>
 </div>
 <% end %>
 

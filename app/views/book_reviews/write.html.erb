@@ -1,11 +1,17 @@
-<%= render :partial => "layouts/header" %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4 text-center">
+      <h2>리뷰 작성</h2>
 
-<p><%= flash[:alert] %></p>
-<h2>리뷰 쓰기</h2>
-
-<form action="/book_reviews/write_complete" method="post">
-  <input type="hidden" name="post_id" value="<%= @book_number %>">
-  <p>제목: <input type="text" name="post_title" placeholder="제목을 입력하세요."></p>
-  <p>내용: <textarea name="post_content" placeholder="내용을 입력하세요."></textarea></p>
-  <input type="submit" value="추가하기">
-</form>
+      <form action="/book_reviews/write_complete" method="post">
+        <input type="hidden" name="post_id" value="<%= @book_number %>">
+        <p><input class="form-sign" name="post_title" placeholder="제목을 입력하세요."></p>
+        <p><textarea class="form-area" name="post_content" placeholder="내용을 입력하세요."></textarea></p>
+        <input class="btn btn-lg btn-block" type="submit" value="등록하기">
+      </form>
+    <div class="col-md-4">
+    </div>
+  </div>
+</div>

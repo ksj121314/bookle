@@ -10,7 +10,7 @@ class UsersController < ApplicationController
       user.money = 20000 #첫 회원가입 초기자금 2만원
       if user.save
         flash[:alert] = "성공적으로 가입되었습니다."
-        redirect_to "/"
+        redirect_to "/users/login"
       else
         flash[:alert] = user.errors.values.flatten.join(' ')
         redirect_to :back

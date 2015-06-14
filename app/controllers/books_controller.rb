@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   before_action :login_check
-  skip_before_action  :login_check, :only => [:main, :posts, :posts_category, :show, :search_list] #해당 작업 3가지 빼고는 전부 로그인이 필요
+  skip_before_action  :login_check, :only => [:main, :posts, :posts_category, :show, :search_list] #해당 작업 5가지 빼고는 전부 로그인이 필요
  
   def main
   end
@@ -86,8 +86,17 @@ class BooksController < ApplicationController
 
   def delete_complete
     post = Book.find(params[:id])
+    sl = ShoppingList.where(book_id: post.id)
+    pl = PurchaseList.where(book_id: post.id)
     if post.user_id == session[:user_id]
       post.destroy
+      sl.each do |sb|
+       sb.destroy
+     end
+      pl.each do |pb|
+       pb.destroy
+     end
+
       flash[:alert] = "삭제되었습니다."
       redirect_to "/"
     else

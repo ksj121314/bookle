@@ -1,14 +1,26 @@
-<%= render :partial => "layouts/header" %>
+<div class="list-container">
+  <h2>주문내역</h2>
 
-<p><%= flash[:alert] %></p>
-<h2>구매 목록 보기</h2>
-
-<% @purchaselist.reverse.each do |purchaselist| %>
-<div style="border: 1px solid #ffffff">
-  <p><img src="<%= purchaselist.book.image_url(:thumb) %>"></p>
-  <h4><a href="/books/show/<%= purchaselist.book.id %>"><%= purchaselist.book.title %></a> [<%= purchaselist.book.book_review.count %>] <%= purchaselist.book.price %> 원 </h4>
-
+  <% @purchaselist.reverse.each do |purchaselist| %>
+  <div class="list-row">
+    <div class="col-md-2">
+      <a href="/books/show/<%= purchaselist.book.id %>"><img src="<%= purchaselist.book.image_url(:thumb) %>" width="105px"></a>
+    </div>
+    <div class="col-md-7">
+      <br>
+      <font style="font-size:20px;"><a href="/books/show/<%= purchaselist.book.id %>">[<%= purchaselist.book.category %>] <%= purchaselist.book.title %></a></font>
+      <br><br>
+      <p>발행일자: <%= purchaselist.book.publicdate %>
+      <p>회원리뷰: <%= purchaselist.book.book_review.count %> 개</p>
+    </div>
+    <div class="col-md-3 text-right">
+      <br>
+      <br>
+      <font style="font-size:20px;"><%= purchaselist.book.price %></font> 원
+      <br>
+      <br>
+      <font color="#FF0000"><%= purchaselist.book.out %></font>
+    </div>
+  </div>
+  <% end %>
 </div>
-<% end %>
-
-<h2>구매 총액: <%= @total_price %> 원</h2>

@@ -1,11 +1,7 @@
-<%= render :partial => "layouts/header" %>
+<div class="list-container">
+  <div class="list-header">
+    <font style="font-size:15px; color:#808080"><font color="#FF0000">"<%= @word %>"</font> 검색 결과</font>
+  </div>
 
-<%= flash[:alert] %>
-
-<div>
-  <h2>"<%= @word %>" 검색 결과</h2>
+  <%= render :partial => "books/posts" %>
 </div>
-
-<hr>
-
-<%= render :partial => "books/posts" %>
